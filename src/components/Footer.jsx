@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className=' m-0 p-5 h-fit'>
             <footer className='bg-[#fdf1ea] p-5 rounded-md flex flex-col gap-3 justify-center items-center'>
-                <div class="py-3 pt-5 flex gap-6 font-semibold text-lg text-center">
+                <div className="py-3 pt-5 flex gap-6 font-semibold text-lg text-center">
 
                     <a className='hover:text-orange-600' href="https://www.evmwheels.com">Home</a>
                     <a className='hover:text-orange-600' href="https://www.evmwheels.com/about_us">About Us</a>
@@ -15,7 +15,7 @@ const Footer = () => {
                     <a className='hover:text-orange-600' href="https://www.evmwheels.com/customer_login">My Account</a>
                     <a className='hover:text-orange-600' href="https://www.evmwheels.com/userlogout">Log out</a>
                 </div>
-                <div class="footer-contact pb-3 flex gap-4">
+                <div className="footer-contact pb-3 flex gap-4">
                     <p className='pt-2 hover:text-orange-600'><span className='font-semibold'>Contact:</span> <a href="tel:+917902810000">+91 790 281 0000</a></p>
                     <a href="mailto:support@evmwheels.com">
                         <p className='pt-2 hover:text-orange-600'><span className='font-semibold'>Email:</span> support@FoodNest.com</p>
@@ -32,7 +32,7 @@ const Footer = () => {
             </div>
                 </div>
 
-                    <div class="footer-privacy-links text-sm flex gap-3">
+                    <div className="footer-privacy-links text-sm flex gap-3">
                         <a className='hover:text-orange-600' href="https://www.evmwheels.com/privacy">
                             <p>Privacy Policy</p>
                         </a> |
@@ -47,7 +47,7 @@ const Footer = () => {
                         </a>
                         
                     </div><hr className='bg-slate-700 w-3/4 h-0.5 mx-auto'/>
-                <div class="footer-policy text-xs px-5 hover:text-orange-600">
+                <div className="footer-policy text-xs px-5 hover:text-orange-600">
                     <p>By continuing past this page, you agree to our Terms of Service, Cookie Policy, Privacy Policy and Content Policies. All trademarks are properties of their respective owners
                         2008-2025 © FoodNest™ Ltd. All rights reserved.</p>
                 </div>

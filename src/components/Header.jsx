@@ -1,28 +1,29 @@
 import React from 'react'
 import { FaCartShopping } from 'react-icons/fa6'
 import { IoPersonOutline, IoSearchSharp } from 'react-icons/io5'
-import { MdContactSupport } from 'react-icons/md'
+import { MdContactSupport, MdOutlineHome } from 'react-icons/md'
 import { RiInformation2Line } from 'react-icons/ri'
+import { Link } from 'react-router-dom'
 
 const navLink = [
     {
-        url: "",
+        url: "/",
+        text: <div className='flex items-center'><MdOutlineHome className='w-6 h-6'/>Home</div>
+    },
+    {
+        url: "about",
         text: <div className='flex gap-1 items-center'><RiInformation2Line className='pt-1 w-6 h-6'/>About FoodNest</div>
     },
     {
-        url: "",
-        text:<div className='flex gap-2 items-center'><IoSearchSharp className='pt-1 w-6 h-6'/>Search</div>
+        url: "contact",
+        text: <div className='flex items-center'><MdContactSupport className='pt-1 w-6 h-6'/>Contact Us</div>
     },
     {
-        url: "",
-        text: <div className='flex gap-1 items-center'><MdContactSupport className='pt-1 w-6 h-6'/>Contact Us</div>
-    },
-    {
-        url: "",
+        url: "signIn",
         text: <div className='flex gap-1 items-center'><IoPersonOutline className=' w-6 h-6'/>Sign In</div>
     },
     {
-        url: "",
+        url: "cart",
         text: <div className='flex gap-1 items-center'><FaCartShopping className='w-6 h-6'/>Cart</div>
     }
 ]
@@ -42,7 +43,7 @@ const Header = () => {
                 </div>
                 <div className='h-full text-center flex justify-around items-center ps-8'>
                     {navLink.map((item) => (
-                        <a key={item.text} className='font-semibold hover:text-orange-600 px-4 rounded' href={item.url}>{item.text}</a>
+                        <Link key={item.text} className='font-semibold hover:text-orange-600 px-4 rounded' children={item.text} to={item.url} />
                     ))}
                 </div>
             </div>
