@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import Products from '../components/Products';
 import { IoIosStar } from 'react-icons/io';
 import { IoSearchSharp } from 'react-icons/io5';
+import { useDispatch } from 'react-redux';
+import { addProductToCart } from '../redux/slices/cartSlice';
+// import { addProductToCart } from '../redux/slices/cartSlice';
 
 const ProductList = () => {
           const [filteredProducts, setFilteredProducts] = useState(Products);
           const [searchTerm, setSearchTerm] = useState("");
-          const[cartItem,setcartItem]=useState("");
+         
 
           function searchProducts(value) {
         setSearchTerm(value);
@@ -15,13 +18,11 @@ const ProductList = () => {
         );
         setFilteredProducts(filtered);
       }
+
  
-  function handleAddToCart(product) {
-    setcartItem([...cartItem,product]);
-    const Items=[...cartItem,product]
-    console.log("updated cart",[...cartItem,product]);
-    
-  }
+      
+      const dispatch= useDispatch()
+
 
     return (
         <div className='w-full h-full pt-20'>
@@ -43,7 +44,7 @@ const ProductList = () => {
                         </div>
                         <div className=" relative shadow-sm w-fit h-fit">
                             <img className="w-40 h-32 object-cover rounded-md" src={product.image} alt="" />
-                                <button onClick={(e)=>handleAddToCart(product)} className='text-green-500 bg-white absolute top-[85%] left-[25%] w-20 py-1 px-3 rounded-md  border border-green-500 hover:bg-green-100 hover:text-green-700'>ADD</button>
+                                <button onClick={(e)=>dispatch(addProductToCart(product))} className='text-green-500 bg-white absolute top-[85%] left-[25%] w-20 py-1 px-3 rounded-md  border border-green-500 hover:bg-green-100 hover:text-green-700'>ADD</button>
                             
                         </div>
                     </div>

@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import Products from '../components/Products';
 import { FiFilter } from 'react-icons/fi';
 import { IoIosStar } from 'react-icons/io';
-import Filter from '../components/filter';
 import Banner from '../assets/Banner.png';
-import Cart from './Cart';
 import { Link } from 'react-router-dom';
 
 
@@ -13,7 +11,8 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredProducts, setFilteredProducts] = useState(Products);
   const [priceFilter, setPriceFilter] = useState("");
-  const [sortOrder, setSortOrder] = useState("");
+  const [priceRate, setPriceRate] = useState("");
+  const [sortOrder, setsortOrder]= useState("");
   
 
   function searchContacts(value) {
@@ -26,25 +25,30 @@ const Home = () => {
 
   function filterOut(value) {
     const filteredCategory = Products.filter((product) =>
-      product.category.toLowerCase().includes(value.toLowerCase())
+      product.category.includes(value)
     );
     setFilteredProducts(filteredCategory);
   }
+
   function filterByPrice(value) {
-    setPriceFilter(value);
-    const filtered = Products.filter((product) =>
-      product.price <= parseInt(value));
-    setFilteredProducts(filtered);
+  setPriceFilter(value);
+   
+      const [min, max]=value.split("-").map(Number);
+      const filtered =filteredProducts.filter((product)=>(
+        product.price >= min && product.price <= max
+      ));
+    
+      setFilteredProducts(filtered);
   }
-  function filterByPrice(value) {
-    setPriceFilter(value);
-    const filtered = Products.filter((product) =>
+  function filterByRating(value) {
+    setPriceRate(value);
+    const filtered = filteredProducts.filter((product) =>
       product.rating >= parseInt(value)
     );
     setFilteredProducts(filtered);
   }
   function sortByPrice(order) {
-    setSortOrder(order);
+    setsortOrder(order);
     const sorted = [...filteredProducts].sort((a, b) => {
       if (order === "asc") return a.price - b.price;
       else return b.price - a.price;
@@ -63,7 +67,7 @@ const Home = () => {
         </div>
         <div>
           <div>
-            <div><label for="Filter" class=" my-1 p-3 flex justify-start items-center gap-3 font-medium text-xl text-white" onClick={Filter}><h4>Filter</h4> <FiFilter /></label></div>
+            <div><label for="Filter" class=" my-1 p-3 flex justify-start items-center gap-3 font-medium text-xl text-white" ><h4>Filter</h4> <FiFilter /></label></div>
             <select id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               onChange={(e) => filterOut(e.target.value)}>
               <option value='' disabled selected><b>Veg/Non-Veg</b></option> 
@@ -72,24 +76,23 @@ const Home = () => {
             </select>
           </div>
           <div>
-            <select id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            <select value={priceFilter} id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               onChange={(e) => filterByPrice(e.target.value)}>
-              <option disabled selected>Filter by Price</option>
-              <option value="200">Under ₹200</option>
-              <option value="200 - 400">₹200 - ₹400</option>
-              <option value="2000">Under ₹2000</option>
-              <option value="10000">Under ₹10000</option>
+              <option value="" disabled selected>Filter by Price</option>
+              <option value="10-200">Under ₹200</option>
+              <option value="100-200">₹100 - ₹200</option>
+              <option value="200-400">₹200 - ₹400</option>
             </select>
           </div>
           <div>
-            <select id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              onChange={(e) => filterByPrice(e.target.value)}>
-              <option disabled selected>Filter by Price</option>
+            <select value={priceRate} id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onChange={(e) => filterByRating(e.target.value)}>
+              <option value="" disabled selected>Ratings</option>
               <option value="4">Ratings 4.0+</option>
             </select>
           </div>
           <div>
-            <select id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            <select value={sortOrder} id="Category" class="bg-white m-1 border border-gray-300 shadow-md text-slate-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-52 p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
               onChange={(e) => sortByPrice(e.target.value)}>
               <option disabled selected>Sort by Price</option>
               <option value="asc">Low to High</option>

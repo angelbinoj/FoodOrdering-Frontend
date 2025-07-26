@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import signBg6copy from '../assets/signBg6copy.png';
+import signBg6 from '../assets/signBg6.png';
 
 const SignIn = () => {
   const [showFirst, setShowfirst] = useState(true);
@@ -10,7 +10,7 @@ const SignIn = () => {
 
   return (
     <div className='w-full h-full mt-10 py-24 bg-[#faf6f0]'>
-      <div className='w-2/3 h-full py-10 mx-auto flex justify-center items-center  border rounded' style={{background:`url(${signBg6copy})`,objectFit:'contain'}}>
+      <div className='w-2/3 h-full py-10 mx-auto flex justify-center items-center  border rounded' style={{background:`url(${signBg6})`,objectFit:'contain'}}>
        {showFirst? (<div className='w-2/4 h-full  bg-white rounded-md flex flex-col p-10'>
           <h1 className='text-3xl mb-1 font-bold'>Login</h1>
           <p className='text-sm mb-8'>Don't have an account ?<span className='text-blue-600 font-semibold ms-1 cursor-pointer' onClick={Switch} >Sign Up</span></p>
@@ -52,13 +52,6 @@ const SignIn = () => {
 }
 
       </div>
-      {/* <div className='w-full object-cover h-full' style={{background:`url(${signBg6})`,width:'100%'}}>
-      </div> */}
-      {/* <div className='w-2/3' style={{background:`url(${signBg2})`}} > */}
-
-      {/* <div className=' w-full relative'><img className='h-fit w-fit absolute ' src={signBg3} /></div>
-        <div className='border'></div> */}
-
     </div>
   )
 }

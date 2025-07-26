@@ -14,16 +14,15 @@ import SignIn from './pages/SignIn'
 import ProductList from './pages/ProductList'
 
 function App() {
- const [cartItem,setcartItem]=useState([]);
  
  return (
    <Routes>
     <Route path='/' element={<MainLayout/>} >
-    <Route index element={<Home cartItem={cartItem} setcartItem={setcartItem}/>} />
+    <Route index element={<Home />} />
     <Route path='about' element={<About/>} />
     <Route path='contact' element={<Contact/>} />
     <Route path='signIn' element={<SignIn/>} />
-    <Route path='cart' element={<Cart cartItem={cartItem}/>} />
+    <Route path='cart' element={<Cart />} />
     <Route path='productList' element={<ProductList/>} />
     </Route>
    </Routes>
