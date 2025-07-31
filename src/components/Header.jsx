@@ -3,6 +3,7 @@ import { FaCartShopping } from 'react-icons/fa6'
 import { IoPersonOutline, IoSearchSharp } from 'react-icons/io5'
 import { MdContactSupport, MdOutlineHome } from 'react-icons/md'
 import { RiInformation2Line } from 'react-icons/ri'
+import logo from '../assets/logo.png';
 import { Link } from 'react-router-dom'
 import { FaEllipsisV } from 'react-icons/fa';
 import { GiHamburgerMenu } from 'react-icons/gi'
@@ -60,7 +61,7 @@ const Header = () => {
         <div className='header relative bg-[#ffe9d6] w-full pb-2 md:ps-4 sm:pr-28 md:px-20 grid sm:grid-cols-[80%_20%] md:grid-cols-[50%_50%] lg:grid-cols-[30%_70%] xl:grid-cols-[40%_60%] gap-2 shadow-xl z-50'>
             <div className='h-full  flex justify-center pr-14 bg-[#fef5ed] border border-transparent rounded shadow-lg'>
                 <div className="relative w-fit">
-                    <img className='w-28 h-20   md:w-30 md:h-20 ' src="src/assets/logo.png" alt="Food Logo" />
+                    <img className='w-28 h-20   md:w-30 md:h-20 ' src={logo} alt="Food Logo" />
                     <h1 className="absolute top-[44%] md:top-[40%] left-[83%] text-[#ff8828] text-2xl md:text-3xl font-arialrounded font-semibold">
                         Nest
                     </h1>
