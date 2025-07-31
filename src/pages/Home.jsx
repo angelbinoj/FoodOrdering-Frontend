@@ -71,11 +71,11 @@ const Home = () => {
                         </div>
                     </div>
                     <div className='my-4 flex flex-wrap gap-3'>
-                        <span className="capitalize cursor-pointer shadow-md py-2 px-3 font-semibold rounded-full border-2 text-sm text-slate-700 dark:bg-slate-200 hover:bg-slate-50">
+                        <span className="capitalize cursor-pointer shadow-md py-2 px-3 font-semibold rounded-full border-2 text-sm text-slate-700 dark:bg-slate-200">
                             <select
                                 value={selectedOption}
                                 onChange={handleSelect}
-                                className="outline-none p-0 dark:bg-slate-200">
+                                className="outline-none p-0 bg-white dark:bg-slate-200">
                                 <option className='w-fit' value="" disabled hidden>
                                     Sort by
                                 </option>
