@@ -9,32 +9,53 @@ const Navigate = useNavigate();
   const fromCart = location.state?.fromCart;
  
   const [showAlert, setShowAlert] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+  });
+  const [errors, setErrors] = useState({ email: '', phone: '' });
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const phoneRegex = /^[6-9]\d{9}$/; 
 
-    
+
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address.';
+    }
+
+    if (!phoneRegex.test(formData.phone)) {
+      newErrors.phone = 'Enter a valid 10-digit Indian phone number.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   
   function Switch() {
     setShowfirst(!showFirst);
   }
   
-  const [formData, setFormData] = useState({
-    name: '',
-    address: '',
-    phone: '',
-  });
   
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+     setErrors((prev) => ({ ...prev, [name]: '' }));
   };
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    localStorage.setItem('checkoutData', JSON.stringify(formData));
-    
-    setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 1000);
+    if (validateForm()) {
+      localStorage.setItem('checkoutData', JSON.stringify(formData));
+      
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 1000);
+  }
     
     if (fromCart) {
           Navigate('/cart');
@@ -47,12 +68,13 @@ const Navigate = useNavigate();
        {showFirst? (<div className='lg:w-2/4 sm:3/4 lg:h-full h-fit  bg-white dark:bg-slate-600 dark:text-white shadow-slate-300 shadow-md rounded-md flex flex-col p-10 my-10'>
           <h1 className='text-3xl mb-1 font-bold'>Login</h1>
           <p className='text-sm mb-8'>Don't have an account ?<span className='text-blue-600 dark:text-blue-400 font-semibold ms-1 cursor-pointer' onClick={Switch} >Sign Up</span></p>
-          <form action="" className='flex flex-col gap-5'>
+          <form onSubmit={handleSubmit}  className='flex flex-col gap-5' noValidate>
             <div>
-              <input onChange={handleChange} className='p-3 w-full border rounded shadow-lg' id="username" type="text" placeholder="Name" pattern="capital" required />
+              <input onChange={handleChange} className='p-3 w-full dark:text-slate-900 border rounded shadow-lg' id="username" type="text" placeholder="Name" required />
             </div>
             <div>
-              <input onChange={handleChange} className='p-3 w-full border rounded shadow-lg' id="phone number" type="text" placeholder=" Phone Number " required />
+              <input value={formData.phone} onChange={handleChange} className='p-3 w-full border dark:text-slate-900 rounded shadow-lg' id="phone number" type="text" placeholder=" Phone Number " required />
+            <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
             </div>
             <hr />
             <div>
@@ -70,15 +92,17 @@ const Navigate = useNavigate();
 ( <div className='lg:w-2/4 sm:w-3/4 lg:h-full h-fit mx-auto bg-white dark:bg-slate-600 dark:text-white rounded-md flex flex-col p-10'>
           <h1 className='text-3xl mb-1 font-bold'>Sign Up</h1>
           <p className='text-sm mb-8'>Already a member ?<span className='text-blue-600 dark:text-blue-400 font-semibold ms-1 cursor-pointer' onClick={Switch} >Login</span></p>
-          <form action="" className='flex flex-col gap-5'>
+          <form onSubmit={handleSubmit}  className='flex flex-col gap-5' noValidate>
             <div>
-              <input onChange={handleChange} className='p-3 w-full border rounded shadow-lg' id="username" type="text" placeholder="Name" pattern="capital" required />
+              <input onChange={handleChange} className='p-3 w-full border dark:text-slate-900 rounded shadow-lg' id="username" type="text" placeholder="Name" pattern="capital" required />
             </div>
             <div>
-              <input onChange={handleChange} className='p-3 w-full border rounded shadow-lg' id="phone number" type="text" placeholder="Phone Number " required />
+              <input value={formData.phone} name='phone' onChange={handleChange} className='p-3 w-full dark:text-slate-900 border rounded shadow-lg' id="phone number" type="tel" pattern="[6-9]{1}[0-9]{9}" placeholder="Phone Number " required />
+               <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
             </div>
             <div>
-              <input onChange={handleChange} className='p-3 w-full border rounded shadow-lg ' id="email" type="email" placeholder="Email " required />
+              <input value={formData.email} name='email' onChange={handleChange} className='p-3 w-full dark:text-slate-900 border rounded shadow-lg ' id="email" type="email" placeholder="Email " required />
+              <p className="text-red-500 text-sm mt-1">{errors.email}</p>
             </div>
             <hr />
             <div>
@@ -98,5 +122,6 @@ const Navigate = useNavigate();
     </div>
   )
 }
+
 
 export default SignIn
