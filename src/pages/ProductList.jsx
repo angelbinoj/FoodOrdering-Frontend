@@ -1,50 +1,47 @@
 import React, { useState } from 'react'
-import Products from '../components/Products';
 import { IoIosStar } from 'react-icons/io';
 import { IoSearchSharp } from 'react-icons/io5';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addProductToCart } from '../redux/slices/cartSlice';
-// import { addProductToCart } from '../redux/slices/cartSlice';
+import { filterBySearch } from '../redux/slices/productSlice';
 
 const ProductList = () => {
-          const [filteredProducts, setFilteredProducts] = useState(Products);
-          const [searchTerm, setSearchTerm] = useState("");
-         
-
-          function searchProducts(value) {
-        setSearchTerm(value);
-        const filtered = Products.filter((product) =>
-          product.fudname.toLowerCase().includes(value.toLowerCase())
-        );
-        setFilteredProducts(filtered);
-      }
-
- 
-      
-      const dispatch= useDispatch()
+const filteredProducts= useSelector(state => state.product.value)
+  const dispatch= useDispatch()
 
 
     return (
-        <div className='w-full h-full pt-20'>
+        <div className='w-full h-full dark:bg-slate-800 lg:pt-20 pb-10 sm:pt-1 sm:pb-0'>
 
-            <div className='w-2/4 h-fit mx-auto mt-20 border rounded-lg shadow-2xl mb-10'>
-                <h1 className='uppercase font-bold py-1 text-2xl text-center rounded-t-lg bg-orange-500 text-white '>menu</h1>
-               <div className=' flex bg-slate-50 border-2 border-slate-500 mx-auto text-center rounded-lg mt-5 w-2/3'> <input className=' p-2 w-full pr-14 border-l-1 border-slate-500 rounded-md bg-slate-50 outline-none ' type="text" placeholder='Search for dishes...' value={searchTerm} onInput={(e) => searchProducts(e.target.value)}  ></input><IoSearchSharp className='pt-2 pr-1 w-8 h-8 text-slate-500'/></div>
-
+            <div className='lg:w-2/4 sm:w-full h-fit mx-auto mt-20 border dark:bg-slate-950 dark:border-transparent rounded-lg shadow-2xl'>
+                <h1 className='uppercase font-bold py-2 lg:py-1 text-2xl text-center rounded-t-lg bg-orange-500 text-white '>menu</h1>
+               <div className=' flex bg-slate-50 border-2 border-slate-500 mx-auto text-center rounded-lg mt-5 w-2/3'>
+                <input className=' p-2 w-full pr-14 border-l-1 border-slate-500 rounded-md bg-slate-50 outline-none ' type="text" placeholder='Search for dishes...' onInput={(e) => dispatch(filterBySearch(e.target.value))}  ></input><IoSearchSharp className='pt-2 pr-1 w-8 h-8 text-slate-500'/>
+               </div>
+               <div className='ms-6 mt-6 mb-2 flex  gap-2'>
+                <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700'>pure-veg</span>
+                 <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700'>non-veg</span>
+                 <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700'>Under ₹200</span>
+                 <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700'>₹200 - ₹400</span>
+               </div><hr className='mx-5 h-0.5 dark:bg-slate-800 '/>
 
                 {filteredProducts.map((product) => (
-                    <div key={product.id} className="flex gap-3 p-5 shadow-sm border-b-2 rounded-lg z-10 w-full h-fit">
+                    <div key={product.id} className=" grid sm:grid-cols-[48%_50%]  lg:grid-cols-[68%_28%] xl:grid-cols-[78%_20%] gap-3 sm:p-2 lg:p-5 dark:text-slate-100 shadow-sm border-b-2 rounded-lg z-10 w-full h-fit">
                         <div>
-                            <h4 className=" text-lg font-bold text-slate-800">
+                            <h4 className=" text-lg font-bold text-slate-800 dark:text-slate-100">
                                 {product.fudname}
                             </h4>
-                            <div className='flex items-center gap-1 '><IoIosStar className='rounded-full' style={{ background: 'green', color: 'white', padding: '2px', width: '18px', height: '18px' }} />{product.rating}</div>
-                            <p className="text-sm font-medium text-slate-600 capitalize mb-1">
+                            <div className='flex items-center' >₹{product.price}</div>
+                            <div className='flex items-center gap-1 my-2 '><IoIosStar className='rounded-full' style={{ background: 'green', color: 'white', padding: '2px', width: '16px', height: '16px' }} />{product.rating}</div>
+                            <p className="text-sm font-medium text-slate-600 dark:text-slate-100 capitalize mb-1">
                                 {product.fudDescription}</p>
                         </div>
-                        <div className=" relative shadow-sm w-fit h-fit">
+                        <div className="flex justify-end relative shadow-sm w-full  h-fit">
+                            <div className='w-fit relative'>
+
                             <img className="w-40 h-32 object-cover rounded-md" src={product.image} alt="" />
                                 <button onClick={(e)=>dispatch(addProductToCart(product))} className='text-green-500 bg-white absolute top-[85%] left-[25%] w-20 py-1 px-3 rounded-md  border border-green-500 hover:bg-green-100 hover:text-green-700'>ADD</button>
+                            </div>
                             
                         </div>
                     </div>
