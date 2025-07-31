@@ -59,7 +59,7 @@ const SignIn = () => {
         localStorage.setItem('checkoutData', JSON.stringify(formData));
         
         setShowAlert(true);
-        setFormData({ name: '', email: '', phone: '' }); // Clear form after submission
+        setFormData({ name: '', email: '', phone: '' }); 
         
         setTimeout(() => {
           setShowAlert(false);
@@ -171,3 +171,4 @@ const SignIn = () => {
 }
 
 export default SignIn
+
