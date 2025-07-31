@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Products from '../components/Products';
 import { IoIosStar } from 'react-icons/io';
 import { IoSearchSharp } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,11 +20,11 @@ const filteredProducts= useSelector(state => state.product.value)
                 <input className=' p-2 w-full pr-14 border-l-1 border-slate-500 rounded-md bg-slate-50 outline-none ' type="text" placeholder='Search for dishes...' onInput={(e) => dispatch(filterBySearch(e.target.value))}  ></input><IoSearchSharp className='pt-2 pr-1 w-8 h-8 text-slate-500'/>
                </div>
                <div className='ms-6 mt-6 mb-2 flex  gap-2'>
-                <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByCategory('Pure-Veg'))}>Pure-Veg</span>
-                 <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByCategory('Non-Veg'))}>Non-Veg</span>
-                 <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByPrice("0-200"))} value="0-200">Under ₹200</span>
-                 <span className='capitalize  py-1 px-2 text-center rounded-full border-2 text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByPrice("200-400"))} value="200-400">₹200 - ₹400</span>
-                 <span className={`capitalize cursor-pointer shadow-md py-2 px-3 font-semibold rounded-full border-2 text-sm ${filteredProducts === Products ? "bg-white text-slate-400" : "bg-red-50 text-red-600"}`} onClick={() => dispatch(clearFilters())}>Clear Filters</span>
+                <span className='capitalize  pt-2 px-2 text-center rounded-full border-2 text-xs md:text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByCategory('Pure-Veg'))}>Pure-Veg</span>
+                 <span className='capitalize  pt-2 px-2 text-center rounded-full border-2 text-xs md:text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByCategory('Non-Veg'))}>Non-Veg</span>
+                 <span className='capitalize  pt-2 px-2 text-center rounded-full border-2 text-xs md:text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByPrice("0-200"))} value="0-200">Under ₹200</span>
+                 <span className='capitalize  pt-2 px-2 text-center rounded-full border-2 text-xs md:text-sm text-black dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700' onClick={() => dispatch(filterByPrice("200-400"))} value="200-400">₹200 - ₹400</span>
+                 <span className={`capitalize cursor-pointer shadow-md p-2 md:p-3 font-semibold rounded-full border-2 text-sm ${filteredProducts === Products ? "bg-white text-slate-400" : "bg-red-50 text-red-600"}`} onClick={() => dispatch(clearFilters())}>Clear Filters</span>
                </div><hr className='mx-5 h-0.5 dark:bg-slate-800 '/>
 
                 {filteredProducts.map((product) => (
