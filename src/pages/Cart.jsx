@@ -56,7 +56,7 @@ const TotalAmt= totalPrice + 30;
     <div className='p-2 dark:bg-slate-950 dark:text-white'>
   {cartItems.length === 0 ? (
     <div className='flex flex-col text-center justify-center items-center pt-40 mb-20 gap-1'>
-      <img className='w-2/4 md:w-2/3' src={emptyCart} alt='Empty Cart'></img>
+      <img className='w-2/4 ' src={emptyCart} alt='Empty Cart'></img>
       <h2 className='font-bold text-lg mt-4 '>Your cart is empty</h2>
       <p>You can go to home page to view more restaurants</p>
       <button className='mt-4 p-2 rounded bg-[#eb6420] text-white font-bold'>
