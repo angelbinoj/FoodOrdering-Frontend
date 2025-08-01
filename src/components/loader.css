@@ -1,0 +1,19 @@
+.load{
+    width: 80px;
+    height: 80px;
+    border:10px solid rgb(229, 229, 229);
+    border-top:10px solid green;
+    border-radius: 50%;
+ animation: animateLoader 1s ease-in 0s infinite normal;
+}
+
+@keyframes animateLoader {
+ 
+  from{
+    transform: rotate(0deg);
+  }
+  to{
+    transform: rotate(360deg);
+  }
+
+}

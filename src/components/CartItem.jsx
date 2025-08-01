@@ -3,10 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { removeProduct } from '../redux/slices/cartSlice';
 import { RiDeleteBinLine } from 'react-icons/ri';
+import './loader.css';
 
 const CartItem = ({ product, index, totalAmt }) => {
   const [count, setCount] = useState(1);
+  const[loading,setLoading]=useState(false)
   const price = (product.price * count);
+
 
   useEffect(() => {
     totalAmt(price, index);
@@ -14,10 +17,19 @@ const CartItem = ({ product, index, totalAmt }) => {
 
   function increment() {
     setCount(count + 1);
+    setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+      }, 1000);
   }
   function decrement() {
     if (count > 1) {
       setCount(count - 1)
+
+      setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
     }
   }
 
@@ -27,7 +39,7 @@ const CartItem = ({ product, index, totalAmt }) => {
   const dispatch = useDispatch()
 
   return (
-    <div className="flex flex-cols-2  md:justify-center w-full  items-center gap-1 md:gap-8 p-3 border-b">
+    <div className="flex flex-cols-2 md:justify-center w-full  items-center gap-1 md:gap-8 p-3 border-b">
       <div className=' sm:w-full' >
         <img src={product.image} alt={product.fudname} className=" w-28 h-20 object-cover rounded" />
       </div>
@@ -44,6 +56,12 @@ const CartItem = ({ product, index, totalAmt }) => {
           <button onClick={() => dispatch(removeProduct(product.id))} className='flex items-center gap-1 shadow-md p-1 text-sm rounded text-[#ff473a] hover:bg-slate-50 ms-2'>Remove<RiDeleteBinLine /></button>
         </div>
       </div>
+      {loading && (
+        <div className='w-full z-30 h-full  absolute flex flex-col justify-center items-center bg-opacity-80 bg-white dark:bg-opacity-50 dark:bg-black'>
+          <span className='load'></span>
+          <h1 className='text-green-500 text-2xl '>Updating Cart...</h1>
+        </div>
+      )}
     </div>
   );
 };
